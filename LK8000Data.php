@@ -27,7 +27,8 @@ function handle_request()
 class LK8kData {
 	private $dataDir = "/data/";
 	private $allowedExts = array("txt");
-        private $varNames = array("LONMIN", "LONMAX", "LATMIN", "LATMAX");
+        private $varNames = array("NAME", "DIR", "MAPZONE");
+        private $coordNames = array("LONMIN", "LONMAX", "LATMIN", "LATMAX");
         // relative path to cache filename, provide false to avoid caching
         public $cacheFilename = "_cache.";
         public $filter = 0;
@@ -64,11 +65,19 @@ class LK8kData {
                         foreach ($this->varNames as $var)
                         {
                                 $matches = array();                        
-                                preg_match("/^\s*{$var}\s*=\s*(-?[\d\.,]+)/mi", $content, $matches);
+                                preg_match("/^\s*{$var}\s*=\s*(-?[\w]+)/mi", $content, $matches);
                                 if (sizeof($matches))
                                         $datas[strtolower($var)] = str_replace(',', '.', $matches[1]);       
                         }
                         
+                        
+                        foreach ($this->coordNames as $var)
+                        {
+                                $matches = array();                        
+                                preg_match("/^\s*{$var}\s*=\s*(-?[\d\.,]+)/mi", $content, $matches);
+                                if (sizeof($matches))
+                                        $datas[strtolower($var)] = str_replace(',', '.', $matches[1]);       
+                        }
                         
                         $res = array(1000, 500, 250, 90);
                         foreach ($res as $r)
