@@ -27,7 +27,7 @@ function handle_request()
 class LK8kData {
 	private $dataDir = "/data/";
 	private $allowedExts = array("txt");
-        private $varNames = array("NAME", "DIR", "MAPZONE");
+        private $varNames = array("NAME", "DIR", "MAPZONE", "TOPOLOGY");
         private $coordNames = array("LONMIN", "LONMAX", "LATMIN", "LATMAX");
         // relative path to cache filename, provide false to avoid caching
         public $cacheFilename = "_cache.";

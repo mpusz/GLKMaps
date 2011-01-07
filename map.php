@@ -37,8 +37,18 @@
   "Longitude: " + item.lonmin + " - " + item.lonmax + "<br/>" +
   "Latitude: " + item.latmin + " - " + item.latmax + "<br/>" +
 /*   '<img src="http://www.bware.it/listing/LKMAPS/' + item.mapzone + '/' + item.name + '.JPG" border="0" /><br/>'*/
-  "Terrain: <br/>" +
-  "Topology: <a href=http://www.bware.it/listing/LKMAPS/" + item.mapzone + "/" + item.dir + ".DIR/" + item.name + ".LKM>" + item.name + ".LKM";
+  "Terrain:<br/>";
+  if (item.res["1000"] == true) 
+	content += "<a href=\"#\">1000</a><br/>";
+  if (item.res["500"] == true) 
+	content += "<a href=\"#\">500</a><br/>";
+  if (item.res["250"] == true) 
+	content += "<a href=\"#\">250</a><br/>";
+  if (item.res["90"] == true) 
+	content += "<a href=\"#\">90</a><br/>";
+
+  if (item.topology == "YES")
+	content += "Topology: <a target=\"_blank\" href=\"http://www.bware.it/listing/LKMAPS/" + item.mapzone + "/" + item.dir + ".DIR/" + item.name + ".LKM\">" + item.name + ".LKM";
     
     myState.infoWindow.setContent(content);
     myState.infoWindow.setPosition(new google.maps.LatLng(lat, lon));
