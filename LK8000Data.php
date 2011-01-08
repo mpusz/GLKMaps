@@ -65,7 +65,7 @@ class LK8kData {
                         foreach ($this->varNames as $var)
                         {
                                 $matches = array();                        
-                                preg_match("/^\s*{$var}\s*=\s*(-?[\w]+)/mi", $content, $matches);
+                                preg_match("/^\s*{$var}\s*=\s*(-?.+[\S])/mi", $content, $matches);
                                 if (sizeof($matches))
                                         $datas[strtolower($var)] = str_replace(',', '.', $matches[1]);       
                         }

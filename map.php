@@ -35,17 +35,16 @@
     var lon = (parseFloat(item.lonmin) + parseFloat(item.lonmax)) / 2;
     var content = "<center><b>" + item.name + "</b></center><br/>" +
   "Longitude: " + item.lonmin + " - " + item.lonmax + "<br/>" +
-  "Latitude: " + item.latmin + " - " + item.latmax + "<br/>" +
+  "Latitude: " + item.latmin + " - " + item.latmax + "<br/>";
 /*   '<img src="http://www.bware.it/listing/LKMAPS/' + item.mapzone + '/' + item.name + '.JPG" border="0" /><br/>'*/
-  "Terrain:<br/>";
   if (item.res["1000"] == true) 
-	content += "<a href=\"#\">1000</a><br/>";
+	content += "Terrain 1000m: <a href=\"http://www.bware.it/listing/LKMAPS/" + item.mapzone + "/" + item.dir + ".DIR/" + item.name + "_1000.DEM\">" + item.name + "_1000.DEM</a><br/>";
   if (item.res["500"] == true) 
-	content += "<a href=\"#\">500</a><br/>";
+	content += "Terrain 500m: <a href=\"http://www.bware.it/listing/LKMAPS/" + item.mapzone + "/" + item.dir + ".DIR/" + item.name + "_500.DEM\">" + item.name + "_500.DEM</a><br/>";
   if (item.res["250"] == true) 
-	content += "<a href=\"#\">250</a><br/>";
+	content += "Terrain 250m: <a href=\"http://www.bware.it/listing/LKMAPS/" + item.mapzone + "/" + item.dir + ".DIR/" + item.name + "_250.DEM\">" + item.name + "_250.DEM</a><br/>";
   if (item.res["90"] == true) 
-	content += "<a href=\"#\">90</a><br/>";
+	content += "Terrain 90m: <a href=\"http://www.bware.it/listing/LKMAPS/" + item.mapzone + "/" + item.dir + ".DIR/" + item.name + "_90.DEM\">" + item.name + "_90.DEM</a><br />";
 
   if (item.topology == "YES")
 	content += "Topology: <a target=\"_blank\" href=\"http://www.bware.it/listing/LKMAPS/" + item.mapzone + "/" + item.dir + ".DIR/" + item.name + ".LKM\">" + item.name + ".LKM";
@@ -109,15 +108,11 @@
         });
   }
   
-  $(function()
-  {
-        initialize();
-  })
-
-</script>
+   </script>
 
    </head>
-   <body>   
+
+   <body onload="initialize()">
         <div id="map_canvas"></div>
    </body>
 </html>
