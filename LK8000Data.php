@@ -9,7 +9,7 @@ function handle_request()
 {
         if(isset($_REQUEST['getJSON']))
         {
-                $obj = new LK8kData();
+                $obj = new LK8000Data();
                 
                 if (isset($_REQUEST['filter']))
                         $obj->filter = (int)$_REQUEST['filter'];
@@ -24,7 +24,7 @@ function handle_request()
  * populate, store and provide data for Google Maps
  * @author Michal migajek Gajek
  */
-class LK8kData {
+class LK8000Data {
 	private $dataDir = "/data/";
 	private $allowedExts = array("txt");
         private $varNames = array("NAME", "DIR", "MAPZONE", "TOPOLOGY");
@@ -136,8 +136,6 @@ class LK8kData {
                 return $data;
         }
 }
-
-
 
 
 handle_request();

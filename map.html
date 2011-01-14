@@ -28,26 +28,26 @@
   
   /**
    * Opens the shared info window, anchors it to the specified overlay, and
-   * displays the marker's position as its content.
+   * displays LKMap data as its content.
    */
   function openInfoWindow(item) {
     var lat = (parseFloat(item.latmin) + parseFloat(item.latmax)) / 2;
     var lon = (parseFloat(item.lonmin) + parseFloat(item.lonmax)) / 2;
     var content = "<center><b>" + item.name + "</b></center><br/>" +
-  "Longitude: " + item.lonmin + " - " + item.lonmax + "<br/>" +
-  "Latitude: " + item.latmin + " - " + item.latmax + "<br/>";
-/*   '<img src="http://www.bware.it/listing/LKMAPS/' + item.mapzone + '/' + item.name + '.JPG" border="0" /><br/>'*/
-  if (item.res["1000"] == true) 
-	content += "Terrain 1000m: <a href=\"http://www.bware.it/listing/LKMAPS/" + item.mapzone + "/" + item.dir + ".DIR/" + item.name + "_1000.DEM\">" + item.name + "_1000.DEM</a><br/>";
-  if (item.res["500"] == true) 
-	content += "Terrain 500m: <a href=\"http://www.bware.it/listing/LKMAPS/" + item.mapzone + "/" + item.dir + ".DIR/" + item.name + "_500.DEM\">" + item.name + "_500.DEM</a><br/>";
-  if (item.res["250"] == true) 
-	content += "Terrain 250m: <a href=\"http://www.bware.it/listing/LKMAPS/" + item.mapzone + "/" + item.dir + ".DIR/" + item.name + "_250.DEM\">" + item.name + "_250.DEM</a><br/>";
-  if (item.res["90"] == true) 
-	content += "Terrain 90m: <a href=\"http://www.bware.it/listing/LKMAPS/" + item.mapzone + "/" + item.dir + ".DIR/" + item.name + "_90.DEM\">" + item.name + "_90.DEM</a><br />";
+                  "Longitude: " + item.lonmin + " - " + item.lonmax + "<br/>" +
+                  "Latitude: " + item.latmin + " - " + item.latmax + "<br/>";
+                   /*   '<img src="http://www.bware.it/listing/LKMAPS/' + item.mapzone + '/' + item.name + '.JPG" border="0" /><br/>'*/
+    if (item.res["1000"] == true) 
+      content += "Terrain 1000m: <a href=\"http://www.bware.it/listing/LKMAPS/" + item.mapzone + "/" + item.dir + ".DIR/" + item.name + "_1000.DEM\">" + item.name + "_1000.DEM</a><br/>";
+    if (item.res["500"] == true) 
+      content += "Terrain 500m: <a href=\"http://www.bware.it/listing/LKMAPS/" + item.mapzone + "/" + item.dir + ".DIR/" + item.name + "_500.DEM\">" + item.name + "_500.DEM</a><br/>";
+    if (item.res["250"] == true) 
+      content += "Terrain 250m: <a href=\"http://www.bware.it/listing/LKMAPS/" + item.mapzone + "/" + item.dir + ".DIR/" + item.name + "_250.DEM\">" + item.name + "_250.DEM</a><br/>";
+    if (item.res["90"] == true) 
+      content += "Terrain 90m: <a href=\"http://www.bware.it/listing/LKMAPS/" + item.mapzone + "/" + item.dir + ".DIR/" + item.name + "_90.DEM\">" + item.name + "_90.DEM</a><br />";
 
-  if (item.topology == "YES")
-	content += "Topology: <a target=\"_blank\" href=\"http://www.bware.it/listing/LKMAPS/" + item.mapzone + "/" + item.dir + ".DIR/" + item.name + ".LKM\">" + item.name + ".LKM";
+    if (item.topology == "YES")
+      content += "Topology: <a target=\"_blank\" href=\"http://www.bware.it/listing/LKMAPS/" + item.mapzone + "/" + item.dir + ".DIR/" + item.name + ".LKM\">" + item.name + ".LKM";
     
     myState.infoWindow.setContent(content);
     myState.infoWindow.setPosition(new google.maps.LatLng(lat, lon));
@@ -83,39 +83,39 @@
     if(location.search.substring(1))
        filterStr = "&" + location.search.substring(1);
 
-        $.getJSON("LK8000Data.php?getJSON=1" + filterStr, function(data)
-        {
-                $.each(data, function(i,item)
-                {
-                        coords = [
-                                new google.maps.LatLng(item.latmin, item.lonmin),        
-                                new google.maps.LatLng(item.latmax, item.lonmin),
-                                new google.maps.LatLng(item.latmax, item.lonmax),
-                                new google.maps.LatLng(item.latmin, item.lonmax),
-                                new google.maps.LatLng(item.latmin, item.lonmin),
-                        ];
-                        var overlay = new google.maps.Polygon({
-                                paths: coords,
-                                strokeColor: item.color,
-                                strokeOpacity: 0.8,
-                                strokeWeight: 2,
-                                fillColor: item.color,
-                                fillOpacity: 0.35
-                        });
-                        overlay.setMap(myState.map);
+    $.getJSON("LK8000Data.php?getJSON=1" + filterStr, function(data)
+    {
+      $.each(data, function(i,item)
+      {
+        coords = [
+                   new google.maps.LatLng(item.latmin, item.lonmin),        
+                   new google.maps.LatLng(item.latmax, item.lonmin),
+                   new google.maps.LatLng(item.latmax, item.lonmax),
+                   new google.maps.LatLng(item.latmin, item.lonmax),
+                   new google.maps.LatLng(item.latmin, item.lonmin),
+                 ];
+        var overlay = new google.maps.Polygon({
+                   paths: coords,
+                   strokeColor: item.color,
+                   strokeOpacity: 0.8,
+                   strokeWeight: 2,
+                   fillColor: item.color,
+                   fillOpacity: 0.35
+                 });
+        overlay.setMap(myState.map);
 
-                        google.maps.event.addListener(overlay, 'click', function() {
-                                openInfoWindow(item);
-                        });
-                })        
-        });
+        google.maps.event.addListener(overlay, 'click', function() {
+                   openInfoWindow(item);
+                 });
+      })        
+    });
   }
   
-   </script>
+</script>
 
-   </head>
+  </head>
 
-   <body onload="initialize()">
-        <div id="map_canvas"></div>
-   </body>
+  <body onload="initialize()">
+    <div id="map_canvas"></div>
+  </body>
 </html>
