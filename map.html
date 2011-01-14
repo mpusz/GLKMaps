@@ -79,8 +79,11 @@
     // Make the info window close when clicking anywhere on the map.
     google.maps.event.addListener(myState.map, 'click', closeInfoWindow);
   
-  
-        $.getJSON('LK8000Data.php?getJSON=1<?php if (isset($_REQUEST['filter'])) echo "&filter=".$_REQUEST['filter']; ?>', function(data)
+    var filterStr;
+    if(location.search.substring(1))
+       filterStr = "&" + location.search.substring(1);
+
+        $.getJSON("LK8000Data.php?getJSON=1" + filterStr, function(data)
         {
                 $.each(data, function(i,item)
                 {
